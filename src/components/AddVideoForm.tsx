@@ -1,39 +1,37 @@
-import React from "react";
-import { Box, Input, Button, VStack } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Button, Input, VStack } from "@chakra-ui/react";
 import type { Video } from "../types";
 
+interface AddVideoFormProps {
+  onAdd: (video: Omit<Video, "id">) => void;
+}
+
 export const AddVideoForm: React.FC<AddVideoFormProps> = ({ onAdd }) => {
-  const [title, setTitle] = React.useState("");
-  const [url, setUrl] = React.useState("");
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     if (!title || !url) return;
-
     onAdd({ title, url });
     setTitle("");
     setUrl("");
-  }
+  };
 
   return (
-    <Box as="form" onSubmit={handleSubmit}>
-      <VStack spacing={4} mb={4}>
-        <Input
-          placeholder="Titre de la vidéo"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <Input
-          placeholder="URL de la vidéo"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-      </VStack>
-      <Button type="submit" colorScheme="teal" w="100%">Ajouter</Button>
-    </Box>
-  )
-}
-
-interface AddVideoFormProps {
-  onAdd: (video: Video) => void;
-}
+    <VStack spacing={3} align="start">
+      <Input
+        placeholder="Titre de la vidéo"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <Input
+        placeholder="URL de la vidéo"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+      />
+      <Button colorScheme="teal" onClick={handleSubmit} width="full">
+        Ajouter
+      </Button>
+    </VStack>
+  );
+};
