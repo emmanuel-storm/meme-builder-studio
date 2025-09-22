@@ -5,7 +5,7 @@ import App from "./App";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider toastOptions={{ defaultOptions: { position: "bottom-right" } }}>
       <App />
     </ChakraProvider>
   </React.StrictMode>
