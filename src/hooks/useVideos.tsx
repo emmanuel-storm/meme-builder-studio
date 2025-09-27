@@ -47,6 +47,14 @@ export const useVideos = () => {
   async function deleteVideo(id: number) {
     await fetch(`${API_URL}/${id}`, { method: "DELETE" });
     setVideos((prev) => prev.filter((v) => v.id !== id));
+
+    toast({
+      title: "Suppression de la vidéo.",
+      description: "La vidéo a bien été supprimée",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    })
   }
 
   return { videos, addVideo, deleteVideo };
